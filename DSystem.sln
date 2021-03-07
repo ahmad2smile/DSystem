@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31025.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart", "Cart\Cart.csproj", "{B7CDFA0A-0E25-4834-A4A9-4B18F0283639}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcClient", "GrpcClient\GrpcClient.csproj", "{2D5869F7-F4D5-465A-A4F6-89AE458B9290}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B7CDFA0A-0E25-4834-A4A9-4B18F0283639}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7CDFA0A-0E25-4834-A4A9-4B18F0283639}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7CDFA0A-0E25-4834-A4A9-4B18F0283639}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7CDFA0A-0E25-4834-A4A9-4B18F0283639}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D5869F7-F4D5-465A-A4F6-89AE458B9290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D5869F7-F4D5-465A-A4F6-89AE458B9290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D5869F7-F4D5-465A-A4F6-89AE458B9290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D5869F7-F4D5-465A-A4F6-89AE458B9290}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C7DA6813-5639-4553-BBFD-65DEA6FD0960}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option csharp_namespace = "Cart";
+
+package cart;
+
+service CartGrpc {
+  rpc GetTotal (TotalRequest) returns (TotalReply);
+}
+
+message TotalRequest {
+  string id = 1;
+}
+
+message TotalReply {
+  int32 total = 1;
+}
