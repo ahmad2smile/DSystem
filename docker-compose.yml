@@ -1,0 +1,43 @@
+version: '3.4'
+
+services:
+  apigateway:
+    image: ${DOCKER_REGISTRY-}apigateway
+    container_name: apigateway
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile.develop
+    ports:
+      - 5000:5000
+    environment:
+      - ASPNETCORE_URLS=http://+:5000
+    networks:
+      - appnet
+    depends_on:
+      - cart
+  cart:
+    container_name: cart
+    image: ${DOCKER_REGISTRY-}cart
+    build:
+      context: .
+      dockerfile: Cart/Dockerfile.develop
+    ports:
+      - 5001:5001
+    environment:
+      - ASPNETCORE_URLS=https://+:5001
+    networks:
+      - appnet
+  client:
+    container_name: client
+    image: ${DOCKER_REGISTRY-}client
+    build:
+      context: .
+      dockerfile: GrpcClient/Dockerfile.develop
+    networks:
+      - appnet
+    depends_on:
+      - cart
+
+
+networks:
+  appnet:

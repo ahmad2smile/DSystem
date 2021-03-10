@@ -1,0 +1,12 @@
+FROM mcr.microsoft.com/dotnet/sdk:5.0
+ARG BUILD_CONFIGURATION=Debug
+
+WORKDIR /src
+COPY ["GrpcClient/GrpcClient.csproj", "GrpcClient/"]
+
+RUN dotnet restore "GrpcClient/GrpcClient.csproj"
+COPY . .
+WORKDIR "/src/GrpcClient"
+RUN dotnet build --no-restore "GrpcClient.csproj" -c $BUILD_CONFIGURATION
+
+CMD ["dotnet", "run"]

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Cart;
 using Grpc.Net.Client;
 
@@ -14,7 +10,7 @@ namespace ApiGateway.Services
 
         public CartService()
         {
-            var channel = GrpcChannel.ForAddress("https://localhost:5001");
+            var channel = GrpcChannel.ForAddress("https://cart:5001");
             _client = new CartGrpc.CartGrpcClient(channel);
         }
 

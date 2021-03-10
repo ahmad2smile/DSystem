@@ -8,7 +8,7 @@ namespace GrpcClient
     {
         static void Main(string[] args)
         {
-            using var channel = GrpcChannel.ForAddress("https://localhost:5001");
+            using var channel = GrpcChannel.ForAddress("https://cart:5001");
             var client = new CartGrpc.CartGrpcClient(channel);
 
             var reply = client.GetTotal(new TotalRequest
