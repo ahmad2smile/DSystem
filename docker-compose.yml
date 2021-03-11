@@ -3,7 +3,7 @@ version: '3.4'
 services:
   apigateway:
     image: ${DOCKER_REGISTRY-}apigateway
-    container_name: apigateway
+    container_name: dsystem-apigateway
     build:
       context: .
       dockerfile: ApiGateway/Dockerfile.develop
@@ -16,19 +16,17 @@ services:
     depends_on:
       - cart
   cart:
-    container_name: cart
+    container_name: dsystem-cart
     image: ${DOCKER_REGISTRY-}cart
     build:
       context: .
       dockerfile: Cart/Dockerfile.develop
-    ports:
-      - 5001:5001
     environment:
       - ASPNETCORE_URLS=http://+:5001
     networks:
       - appnet
   client:
-    container_name: client
+    container_name: dsystem-client
     image: ${DOCKER_REGISTRY-}client
     build:
       context: .
@@ -37,6 +35,16 @@ services:
       - appnet
     depends_on:
       - cart
+  rabbitmq:
+    image: ${DOCKER_REGISTRY-}rabbitmq
+    container_name: dsystem-rabbitmq
+    build:
+      context: .
+      dockerfile: RabbitMQ/Dockerfile
+    hostname: dsystem-rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
 
 
 networks:
