@@ -23,13 +23,7 @@ namespace Cart
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>().ConfigureKestrel(options =>
-                    {
-                        options.Listen(IPAddress.Any, 5001, listenOptions =>
-                            {
-                                listenOptions.Protocols = HttpProtocols.Http2;
-                            });
-                    });
+                    webBuilder.UseStartup<Startup>();
                 });
     }
 }

@@ -10,7 +10,7 @@ namespace ApiGateway.Services
 
         public CartService()
         {
-            var channel = GrpcChannel.ForAddress("https://cart:5001");
+            var channel = GrpcChannel.ForAddress("http://cart:5001");
             _client = new CartGrpc.CartGrpcClient(channel);
         }
 
