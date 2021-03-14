@@ -8,7 +8,7 @@ Project has 2 Main Services `Cart` & `Suggestions`. When some item is added or r
 
 `Suggestions` service consuming `cartQueue` logs user's actions.
 
-This Async communication pattern is done with **RabbitMQ** using **Mass Transit**.
+This Async communication pattern is done with **RabbitMQ** using **Mass Transit**. Services use **GRPC** to communicate with `ApiGateway`
 
 
 ## Run
@@ -44,3 +44,7 @@ info: Suggestions.Models.AddItemToCartConsumer[0]
 dbug: MassTransit.ReceiveTransport[0]
       RECEIVE rabbitmq://rabbitmq/cartQueue 00020000-ac12-0242-4e48-08d8e72b03c1 Cart.AddItemReply Suggestions.Models.AddItemToCartConsumer(00:00:00.0077969)
 ```
+
+## Architectue
+
+<img src="https://user-images.githubusercontent.com/6108922/111084495-ed2d3300-8512-11eb-8863-ff101481e241.png" width="700px" />
