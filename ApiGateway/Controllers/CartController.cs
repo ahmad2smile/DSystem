@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApiGateway.Services;
+using Cart;
+using Microsoft.AspNetCore.Http;
 
 namespace ApiGateway.Controllers
 {
@@ -45,6 +47,29 @@ namespace ApiGateway.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
+        }
+
+        [HttpPost("{id}/addItem")]
+        public Task<AddItemReply> AddItem([FromBody] AddItemRequest request)
+        {
+            if (!TryValidateModel(request))
+            {
+                throw new BadHttpRequestException("Invalid data");
+            }
+
+            return _cartService.AddItem(request);
+        }
+
+
+        [HttpPost("{id}/removeItem")]
+        public Task<RemoveItemReply> RemoveItem([FromBody] RemoveItemRequest request)
+        {
+            if (!TryValidateModel(request))
+            {
+                throw new BadHttpRequestException("Invalid data");
+            }
+
+            return _cartService.RemoveItem(request);
         }
 
         // PUT api/<CartController>/5

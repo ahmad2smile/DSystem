@@ -1,13 +1,15 @@
-﻿using System;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Cart.Services;
+using System;
+using Cart;
+using GreenPipes;
 using MassTransit;
+using Suggestions.Models;
 
-namespace Cart
+namespace Suggestions
 {
     public class Startup
     {
@@ -17,18 +19,24 @@ namespace Cart
         {
             services.AddMassTransit(x =>
             {
-                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(config =>
+                x.AddConsumer<AddItemToCartConsumer>();
+                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
-                    config.UseHealthCheck(provider);
-                    config.Host(new Uri("rabbitmq://rabbitmq"), h =>
+                    cfg.UseHealthCheck(provider);
+                    cfg.Host(new Uri("rabbitmq://rabbitmq"), h =>
                     {
                         h.Username("guest");
                         h.Password("guest");
                     });
+                    cfg.ReceiveEndpoint("cartQueue", ep =>
+                    {
+                        ep.PrefetchCount = 16;
+                        ep.UseMessageRetry(r => r.Interval(2, 100));
+                        ep.ConfigureConsumer<AddItemToCartConsumer>(provider);
+                    });
                 }));
             });
             services.AddMassTransitHostedService();
-
             services.AddGrpc();
         }
 
@@ -45,7 +53,6 @@ namespace Cart
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<GreeterService>();
-                endpoints.MapGrpcService<CartService>();
 
                 endpoints.MapGet("/", async context =>
                 {

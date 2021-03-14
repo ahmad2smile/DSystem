@@ -6,6 +6,8 @@ package cart;
 
 service CartGrpc {
   rpc GetTotal (TotalRequest) returns (TotalReply);
+  rpc AddItem (AddItemRequest) returns (AddItemReply);
+  rpc RemoveItem (RemoveItemRequest) returns (RemoveItemReply);
 }
 
 message TotalRequest {
@@ -14,4 +16,25 @@ message TotalRequest {
 
 message TotalReply {
   int32 total = 1;
+}
+
+
+message AddItemRequest {
+	string itemId = 1;
+	string userId = 2;
+}
+
+message AddItemReply {
+	string itemId = 1;
+	string userId = 2;
+}
+
+message RemoveItemRequest {
+	string itemId = 1;
+	string userId = 2;
+}
+
+message RemoveItemReply {
+	string itemId = 1;
+	string userId = 2;
 }

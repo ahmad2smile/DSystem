@@ -1,0 +1,18 @@
+FROM mcr.microsoft.com/dotnet/sdk:5.0
+ARG BUILD_CONFIGURATION=Debug
+ENV ASPNETCORE_ENVIRONMENT=Development
+ENV ASPNETCORE_URLS=http://+:5002
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
+EXPOSE 5001
+
+WORKDIR /src
+COPY ["Suggestions/Suggestions.csproj", "Suggestions/"]
+
+RUN dotnet restore "Suggestions/Suggestions.csproj"
+COPY . .
+WORKDIR "/src/Suggestions"
+RUN dotnet build --no-restore "Suggestions.csproj" -c $BUILD_CONFIGURATION
+
+RUN echo "exec dotnet run --no-build --no-launch-profile -c $BUILD_CONFIGURATION --" > /entrypoint.sh
+
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]

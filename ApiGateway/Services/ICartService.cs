@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Cart;
 
 namespace ApiGateway.Services
 {
     public interface ICartService
     {
         Task<int> GetTotal(string cartId);
+        Task<AddItemReply> AddItem(AddItemRequest request);
+        Task<RemoveItemReply> RemoveItem(RemoveItemRequest request);
     }
 }

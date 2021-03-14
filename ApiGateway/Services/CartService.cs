@@ -23,5 +23,19 @@ namespace ApiGateway.Services
 
             return reply.Total;
         }
+
+        public async Task<AddItemReply> AddItem(AddItemRequest request)
+        {
+            var reply = await _client.AddItemAsync(request);
+
+            return reply;
+        }
+
+        public async Task<RemoveItemReply> RemoveItem(RemoveItemRequest request)
+        {
+            var reply = await _client.RemoveItemAsync(request);
+
+            return reply;
+        }
     }
 }

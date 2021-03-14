@@ -11,7 +11,7 @@ namespace GrpcClient
     {
         private const string CartServer = "http://cart:5001";
 
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
             Console.WriteLine("Waiting for Cart Server...");
             Thread.Sleep(5000);
